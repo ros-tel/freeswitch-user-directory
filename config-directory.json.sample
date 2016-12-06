@@ -1,0 +1,16 @@
+{
+    "listen": {
+        "host": "127.0.0.1",
+        "port": "8000"
+    },
+    "redis_local": {
+        "host": "127.0.0.1",
+        "port": "6390",
+        "auth": "FreeSwitch",
+        "key_prefix": "agentid:"
+    },
+    "domains": [
+        "pbx.example.com",
+        "77.12.17.21"
+    ]
+}
