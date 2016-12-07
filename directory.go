@@ -61,7 +61,7 @@ type (
 	TAuthData struct {
 		Name     string `json:"name"`
 		Number   string `json:"number"`
-		Password string `json:"pass"`
+		Password string `json:"pass,omitempty"`
 	}
 
 	TConfig struct {
