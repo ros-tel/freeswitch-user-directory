@@ -96,6 +96,10 @@ func main() {
 	redisServer := config.RedisLocal.Host + ":" + config.RedisLocal.Port
 	redisPassword := config.RedisLocal.Auth
 	pool = newPool(redisServer, redisPassword)
+	// Check redis connect
+	if _, err = pool.Dial(); err != nil {
+		log.Fatalln("Redis Driver Error", err)
+	}
 
 	http.HandleFunc("/directory", directory)
 	err := http.ListenAndServe(config.Listen.Host+":"+config.Listen.Port, nil)
@@ -114,7 +118,7 @@ func directory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "POST" {
-		if r.ParseForm(); err != nil {
+		if err := r.ParseForm(); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 		}
 		eventName := r.Form.Get("Event-Name")
